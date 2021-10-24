@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASS}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  dbdata:
