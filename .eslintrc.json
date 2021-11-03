@@ -20,6 +20,9 @@
 	"rules": {
 		"prettier/prettier": "error",
 		"space-before-function-paren": "off",
-		"no-useless-constructor": "off"
+		"no-useless-constructor": "off",
+		"@typescript-eslint/no-empty-function": "off",
+		"camelcase": "off",
+		"@typescript-eslint/no-namespace": "off"
 	}
 }
