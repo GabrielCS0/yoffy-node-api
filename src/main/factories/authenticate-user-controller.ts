@@ -1,6 +1,6 @@
 import { AuthenticateUserService } from '@data/services/'
-import { UsersRepository } from '@infra/repositories/users'
-import { ControllerContract } from '@presentation/contracts'
+import { UsersRepository } from '@infra/repositories/'
+import { ControllerContract } from '@presentation/contracts/'
 import { AuthenticateUserController } from '@presentation/controllers/'
 
 export const makeAuthenticateUserController = (): ControllerContract => {
