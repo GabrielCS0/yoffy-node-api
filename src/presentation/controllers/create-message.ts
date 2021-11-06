@@ -1,4 +1,4 @@
-import { CreateMessageUseCase } from '@domain/useCases'
+import { CreateMessageUseCase, Io } from '@domain/useCases'
 import {
   HttpResponse,
   ControllerContract,
@@ -11,10 +11,11 @@ export class CreateMessageController implements ControllerContract {
 
   async handle({
     text,
-    userId
+    userId,
+    io
   }: CreateMessageController.Request): Promise<HttpResponse> {
     try {
-      const message = await this.createMessage.execute({ text, userId })
+      const message = await this.createMessage.execute({ text, userId, io })
 
       return success(message)
     } catch (error) {
@@ -27,5 +28,6 @@ namespace CreateMessageController {
   export type Request = {
     text: string
     userId: string
+    io: Io
   }
 }

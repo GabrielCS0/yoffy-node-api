@@ -8,9 +8,23 @@ export class CreateMessageService implements CreateMessageUseCase {
 
   async execute({
     text,
-    userId
+    userId,
+    io
   }: CreateMessageUseCase.Params): Promise<CreateMessageUseCase.Result> {
     const message = await this.messagesRepository.create({ text, userId })
+
+    const infoWS = {
+      text: message.text,
+      userId: message.userId,
+      createdAt: message.createdAt,
+      user: {
+        name: message.user.name,
+        avatarUrl: message.user.avatarUrl
+      }
+    }
+
+    io.emit('new_message', infoWS)
+
     return message
   }
 }
