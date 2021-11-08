@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { sign } from 'jsonwebtoken'
 
 import { AuthenticateUserUseCase } from '@domain/useCases'
-import { UsersRepositoryContract } from '@data/contracts'
+import { EncrypterContract, UsersRepositoryContract } from '@data/contracts'
 
 type GithubAccessTokenResponse = {
   access_token: string
@@ -16,7 +15,10 @@ type GithubUserResponse = {
 }
 
 export class AuthenticateUserService implements AuthenticateUserUseCase {
-  constructor(private readonly usersRepository: UsersRepositoryContract) {}
+  constructor(
+    private readonly usersRepository: UsersRepositoryContract,
+    private readonly encrypter: EncrypterContract
+  ) {}
 
   async execute({
     code
@@ -55,20 +57,10 @@ export class AuthenticateUserService implements AuthenticateUserUseCase {
       })
     }
 
-    const accessToken = sign(
-      {
-        user: {
-          id: user.id,
-          name,
-          avatarUrl
-        }
-      },
-      process.env.JWT_SECRET,
-      {
-        subject: user.id,
-        expiresIn: '1d'
-      }
-    )
+    const accessToken = this.encrypter.encrypt({
+      userId: user.id,
+      userName: user.name
+    })
 
     return { ...user, accessToken }
   }

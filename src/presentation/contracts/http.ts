@@ -3,7 +3,7 @@ export type HttpResponse = {
   data: unknown
 }
 
-export const success = (data: unknown) => ({
+export const success = (data: unknown): HttpResponse => ({
   statusCode: 200,
   data
 })
