@@ -22,7 +22,7 @@ export class AuthenticateUserController implements ControllerContract {
   }
 }
 
-namespace AuthenticateUserController {
+export namespace AuthenticateUserController {
   export type Request = {
     code: number
   }
