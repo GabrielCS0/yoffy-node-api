@@ -2,10 +2,6 @@
   Yoffy Node API
 </h1>
 
-<h3 align="center">
-  Project in development...
-</h3>
-
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/GabrielCordeiroDev/yoffy-node-api">
 
